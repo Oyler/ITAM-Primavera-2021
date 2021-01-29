@@ -24,8 +24,8 @@ def fast_glc(seed, m, a, c):
 
 
 def glc_plot(data, s):
-    y = np.arange(np.longdouble(len(data)))
-    plt.scatter(data, y, s=s)
+    x = np.arange(np.longdouble(len(data)))
+    plt.scatter(x, data, s=s)
     plt.show()
 
 
@@ -78,10 +78,19 @@ for sample in test:
     flag, reason = has_complete_cycle(sample[0], sample[1], sample[2])
     print([flag, reason])
 
-# Test plots
-p = np.array([2 ** 12, 1664525, 1013904223], dtype=np.longdouble)
-q = np.array([16, 13, 13])
-data = fast_glc(3, p[0], p[1], p[2])
 '''
 
+# Test plots
+test_0 = np.array([1024, 401, 101], dtype=np.longdouble)
+test_1 = np.array([2 ** 12, 1664525, 1013904223], dtype=np.longdouble)
+test_2 = np.array([2 ** 25, 1664525, 1013904223], dtype=np.longdouble)
+data_0 = fast_glc(5, test_0[0], test_0[1], test_0[2])
+data_1 = fast_glc(3, test_1[0], test_1[1], test_1[2])
+data_2 = fast_glc(3, test_2[0], test_2[1], test_2[2])
 
+plt.figure(figsize=(10, 10))
+glc_plot(data_0, 8)
+plt.figure(figsize=(10, 10))
+glc_plot(data_1, 2)
+plt.figure(figsize=(18, 18))
+glc_plot(data_2, 0.0001)
