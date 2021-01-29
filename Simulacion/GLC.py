@@ -1,36 +1,32 @@
 import matplotlib.pyplot as plt
 from math import gcd, sqrt
+import numpy as np
 
 # Function to generate a list of pseudorandom numbers for plotting
 
 
-def glc(seed, mod, mult, c):
-    Z = [[0],[seed]]
-    for i in range(1, mod + 1):
-        z = (mult * Z[1][i - 1] + c) % mod
-        if z in Z[1]:
+def fast_glc(seed, m, a, c):
+    Z = np.zeros(int(m + 1), dtype=np.longdouble)
+    Z[0] = seed
+    k = 1.0
+    while k <= m:
+        z = (a * Z[int(k) - 1] + c) % m
+        if z == seed:
+            Z[int(k)] = z
             break
         else:
-            Z[0].append(i)
-            Z[1].append(z)
+            Z[int(k)] = z
+        k += 1.0
     return Z
 
 
-# Function to plot the pseudorandom numbers
+# Function to make a scatter plot of the glc.
 
 
-def glc_plot(seed, mod, mult, c):
-    x, y = glc(seed, mod, mult, c)
-    plt.scatter(x, y)
+def glc_plot(data, s):
+    y = np.arange(np.longdouble(len(data)))
+    plt.scatter(data, y, s=s)
     plt.show()
-
-
-# Function to print the list of pseudorandom numbers
-
-
-def print_list(lst):
-    for k in range(len(lst)):
-        print(lst[k])
 
 
 # Function that generates a list of the prime factors of n
@@ -81,6 +77,11 @@ test = [[16, 13, 13], [16, 12, 13], [2 ** 10, 25437, 35421], [13, 1, 12],
 for sample in test:
     flag, reason = has_complete_cycle(sample[0], sample[1], sample[2])
     print([flag, reason])
+
+# Test plots
+p = np.array([2 ** 12, 1664525, 1013904223], dtype=np.longdouble)
+q = np.array([16, 13, 13])
+data = fast_glc(3, p[0], p[1], p[2])
 '''
-# GLC, grafica de dispersion
-# glc_plot(5, 1024, 401, 101)
+
+
