@@ -6,10 +6,10 @@ import numpy as np
 
 
 def fast_glc(seed, m, a, c):
-    Z = np.zeros(int(m + 1), dtype=np.longdouble)
+    Z = np.zeros(int(m), dtype=np.longdouble)
     Z[0] = seed
     k = 1.0
-    while k <= m:
+    while k < m:
         z = (a * Z[int(k) - 1] + c) % m
         if z == seed:
             Z[int(k)] = z
@@ -78,7 +78,6 @@ for sample in test:
     flag, reason = has_complete_cycle(sample[0], sample[1], sample[2])
     print([flag, reason])
 
-'''
 
 # Test plots
 test_0 = np.array([1024, 401, 101], dtype=np.longdouble)
@@ -94,3 +93,4 @@ plt.figure(figsize=(10, 10))
 glc_plot(data_1, 2)
 plt.figure(figsize=(18, 18))
 glc_plot(data_2, 0.0001)
+'''
