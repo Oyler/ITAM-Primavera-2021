@@ -44,6 +44,13 @@ def ep_comp_plot(sample_size, pmf_bounds):
     plt.show()
 
 # Running the program
-sample_size = 10000
-pmf_bounds = (-1, 1)
-ep_comp_plot(sample_size, pmf_bounds)
+
+
+def main():
+    sample_size = 10000
+    pmf_bounds = (-1, 1)
+    ep_comp_plot(sample_size, pmf_bounds)
+
+
+if __name__ == "__main__":
+    main()
