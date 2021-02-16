@@ -1,30 +1,32 @@
-import matplotlib.pyplot as plt
-from math import gcd, sqrt
 import numpy as np
+import matplotlib.pyplot as plt
 
-def neumann(seed, bound):
-    Z = []
-    Z.append(str(seed))
-    for k in range(1, bound):
-        aux = int(Z[k - 1]) ** 2
-        if aux == 0:
-            Z.append(str(00))
-            break
-        else:
-            if aux < 10:
-                aux = str(aux)
-                aux = "000" + aux
-            elif 10 <= aux < 100:
-                aux = str(aux)
-                aux = "00" + aux
-            elif 100 <= aux < 1000:
-                aux = str(aux)
-                aux = "0" + aux
-            else:
-                aux = str(aux)
-            Z.append(aux[1:3])
-    return Z
+def main():
+    trials = 10000
+    size = 1000
+    S = []
+    for k in range(trials):
+        arr = np.random.binomial(1, 0.09245, size)
+        gam = np.random.gamma(7000, 1, size)
+        sum = 0
+        for j in range(size):
+            if arr[j] == 1:
+                sum += gam[j]
+        S.append(sum)
 
-data = neumann(8, 10)
-print(data)
+    count = 0
+    for s in S:
+        if s > 500000:
+            count += 1
 
+    plot = plt.figure()
+    plt.hist(S, density=True, bins=30, rwidth=0.75)
+    plot.suptitle("Probabilidad de tener $x en reclamos", fontsize=16)
+    plt.xlabel('Cantidad ($) total')
+    plt.ylabel('Probabilidad')
+    plt.show()
+    print(f'The probability is {count / trials}')
+
+
+if __name__ == "__main__":
+    main()
