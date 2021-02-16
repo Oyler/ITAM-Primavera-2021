@@ -69,7 +69,7 @@ def plot_compare(gen_sample, target_func, bounds):
     size = len(target_func)
     t = np.linspace(bounds[0], bounds[1], size)
     plot = plt.figure()
-    plt.hist(gen_sample, density=True, bins=30, rwidth=0.75, range=bounds, label='Simulation')
+    plt.hist(gen_sample, density=True, bins=20, rwidth=0.75, range=bounds, label='Simulation')
     plt.plot(t, target_func, label='Target Density')
     plot.suptitle('Uknown Density', fontsize=16)
     plt.legend(loc='best')
