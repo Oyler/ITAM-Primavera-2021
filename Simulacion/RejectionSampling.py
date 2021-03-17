@@ -48,3 +48,5 @@ def rejection_sampling(pdf, size, bounds):
         trials += 1
 
     return S, trials
+
+
