@@ -112,8 +112,8 @@ def events_in_consecutive(lam, n, plot=False, event_times=None, ie_times=None):
 
 
 def main():
-    lam = 5
-    n = 100
+    lam = 1/40
+    n = 1000
     inter_times = inter_event_times(lam, n, plot=True)
     ie_times = inter_times['inter event time'].tolist()
     abs_times = abs_event_times(lam, n, plot=True, ie_times=ie_times)
