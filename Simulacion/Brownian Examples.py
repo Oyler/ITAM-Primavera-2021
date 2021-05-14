@@ -32,13 +32,13 @@ def main():
 
     # We define a utility function for plotting first.
 
-    def plot_stock_price(mu, sigma):
+    def plot_stock_price(mu, sigma, delta_t=52, dt=0.1):
         """
         Plots stock price for multiple scenarios
         """
         example_3 = plt.figure(figsize=(9, 4))
         for _ in range(5):
-            plt.plot(b_3.stock_price(mu=mu, sigma=sigma, dt=0.1))
+            plt.plot(b_3.stock_price(mu=mu, sigma=sigma, delta_t=delta_t, dt=dt))
         plt.legend(['Scenario-' + str(_) for _ in range(1, 6)], loc='upper left')
         plt.hlines(y=100, xmin=0, xmax=520, linestyle='--', color='k')
         example_3.suptitle(f'Stock price simulation\n\u03BC: {mu}, \u03C3: {sigma}', fontsize=16)
@@ -65,6 +65,8 @@ def main():
     # Example 5: Consider three independent realizations of a stock with initial value S_0 = 100, drift = 0.1 and
     # volatility = 0.3
     plot_stock_price(mu=0.1, sigma=0.3)
+
+    b_3.twoD_plot(1000)
 
 
 if __name__ == '__main__':
