@@ -112,17 +112,20 @@ def events_in_consecutive(lam, n, plot=False, event_times=None, ie_times=None):
 
 
 def main():
-    lam = 1/40
+    lam1 = 5
+    lam2 = 40
     n = 1000
-    inter_times = inter_event_times(lam, n, plot=True)
+    inter_times = inter_event_times(lam1, n, plot=True)
     ie_times = inter_times['inter event time'].tolist()
-    abs_times = abs_event_times(lam, n, plot=True, ie_times=ie_times)
+    abs_times = abs_event_times(lam2, n, plot=True, ie_times=ie_times)
     event_times = abs_times['event time'].tolist()
-    consecutive, mean = events_in_consecutive(lam, n, plot=True, event_times=event_times,
+    consecutive, mean = events_in_consecutive(lam2, n, plot=True, event_times=event_times,
                                               ie_times=ie_times)
     display(inter_times)
     display(abs_times)
     display(consecutive)
+    no_clients = event_times[120]
+    print(f'The number of clients at 2hrs is {no_clients} ')
     print(f'The mean number of events per unit time is {mean}')
 
 

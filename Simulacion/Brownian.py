@@ -18,9 +18,10 @@
 # =====================================================================================================================
 
 import numpy as np
+from scipy.stats import norm
 import matplotlib.pyplot as plt
 
-class Brownian():
+class Brownian:
     def __init__(self, x_0=0):
         """
         Init class.
@@ -112,3 +113,15 @@ class Brownian():
         s = s_0 * (np.exp(stock_var + weiner_process))
 
         return s
+
+    def twoD_plot(self, n_steps):
+        x = self.gen_normal(n_steps)
+        y = self.gen_normal(n_steps)
+
+        plt.plot(x, y, c='b')
+        x_max, x_min, y_max, y_min = x.max(), x.min(), y.max(), y.min()
+        scale_factor = 1.25
+        x_max, x_min, y_max, y_min = x_max * scale_factor, x_min * scale_factor, y_max * scale_factor, y_min * scale_factor
+        plt.xlim(x_min, x_max)
+        plt.ylim(y_min, y_max)
+        plt.show()
